@@ -6,12 +6,12 @@ export const Subjects = ({ courses, linkToChapter }) => {
     <Container>
       {courses[0] &&
         courses.map(course => {
-          const { id, name, icon } = course
+          const { id, name, icon, chapters } = course
           return (
             <span
               key={id}
               className='course-style'
-              onClick={() => linkToChapter(id)}
+              onClick={() => linkToChapter(id, chapters)}
             >
               <div className='image'>
                 <img src={icon} alt={name} />

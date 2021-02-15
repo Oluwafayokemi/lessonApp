@@ -10,6 +10,7 @@ const url = 'https://jackiechanbruteforce.ulesson.com/3p/api/content/grade'
 export const Dashboard = () => {
   const [courses, setCourses] = useState('')
   const [openCourse, setOpenCourse] = useState(false)
+  const [chapters, setChapters] = useState('')
 
   useEffect(() => {
     if (!courses) {
@@ -57,8 +58,8 @@ export const Dashboard = () => {
     }
   ]
 
-  const linkToChapter = id => {
-    console.log(id, '###############')
+  const linkToChapter = (id, chapter) => {
+    setChapters(chapter)
     setOpenCourse(!openCourse)
   }
 
@@ -92,7 +93,7 @@ export const Dashboard = () => {
           </div>
         </div>
       ) : (
-        <Chapters />
+        <Chapters courses={chapters} />
       )}
     </Container>
   )

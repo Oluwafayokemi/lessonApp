@@ -3,112 +3,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { VideoPage } from './videoPage'
 
-const courses = [
-  {
-    id: 1,
-    name: 'Rational Numbers',
-    lessons: [
-      {
-        id: '1',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '2',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '3',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '4',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '5',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: 'Linear Equation',
-    lessons: [
-      {
-        id: '6',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '7',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '8',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '9',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      },
-      {
-        id: '10',
-        subject: 'Mathematics',
-        name: 'Rational numbers',
-        icon:
-          'https://ulesson-staging.s3.eu-west-2.amazonaws.com/subject_icons/icons/2/thumb/thumb.jpeg',
-        media_url:
-          'https://d2zjjckqo1cait.cloudfront.net/free_videos/1/original/stapler-FuXgvD.mp4'
-      }
-    ]
-  }
-]
-
-export const Chapters = () => {
+export const Chapters = ({ courses }) => {
   const [selectedCourse, setSelectedCourse] = useState({})
   const [isCourseSelected, setIsCourseSelected] = useState(false)
 
@@ -117,8 +12,6 @@ export const Chapters = () => {
     setSelectedCourse({ lessonId, lessonVideo, lessonName, courseTitle })
   }
 
-  let { id } = useParams()
-  console.log(id, '@@@@@@@@@@@@2')
   return (
     <Container>
       {!isCourseSelected ? (
@@ -177,7 +70,8 @@ export const Chapters = () => {
 
 const Container = styled.div`
   background-color: #e5e5e5;
-
+  display: flex;
+  
   .course-wrapper {
     padding: 1em;
     font-family: Itim;
@@ -188,8 +82,6 @@ const Container = styled.div`
     letter-spacing: -1px;
     color: #313848;
     max-width: max-content;
-    margin: 0 auto;
-    width: 100%;
   }
 
   .course-header {
@@ -200,6 +92,8 @@ const Container = styled.div`
     line-height: 114.21%;
     letter-spacing: -1px;
     color: #313848;
+    padding-left: 4em;
+
   }
 
   .subject {
@@ -215,9 +109,9 @@ const Container = styled.div`
   .card {
     display: inline-flex;
     cursor: pointer;
-    flex-flow: rowwrap;
     margin-right: 26px;
     margin-bottom: 26px;
+    align-items: center;
     justify-content: center;
     border: 1px solid #fff;
     transition: 0.3s;
@@ -226,20 +120,22 @@ const Container = styled.div`
     position: relative;
     max-width: 270px;
     max-height: 270px;
-    perspective: 500px;
   }
 
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
   .card-wrapper {
-    display: grid;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    max-height: 250px;
   }
   .card img {
-    width: 40%;
+    max-width: 30%;
     padding: 1em;
-    border-radius: 16.575px;
     background: #ffffff;
     z-index: 10;
   }
@@ -252,5 +148,10 @@ const Container = styled.div`
     text-align: center;
     letter-spacing: 0.530996px;
     color: #313848;
+    word-wrap: break-word;
+    max-width: 250px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
