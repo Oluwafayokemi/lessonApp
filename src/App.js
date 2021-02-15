@@ -1,33 +1,25 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
 import { Header } from './commons/header'
 import { Dashboard } from './Dashboard'
+import { Chapters } from './Dashboard/Chapters'
 
 const App = () => {
   return (
-    <div className='App'>
-      <Switch>
+    <Switch>
+      <div className='App'>
         <Route path='/'>
           <Header />
         </Route>
-        <Route exact path='/dashboard'>
+        <Route exact path='/'>
           <Dashboard />
         </Route>
-        {/* <Route path="/chapters">
+        <Route path='/chapters/:id'>
           <Chapters />
-        </Route> */}
-      </Switch>
-      <Dashboard />
-    </div>
+        </Route>
+      </div>
+    </Switch>
   )
 }
 
 export default App
-
-const Container = styled.div`
-  .App {
-    height: 100%;
-    background-color: #e5e5e5;
-  }
-`

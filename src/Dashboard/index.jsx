@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { Subjects } from './subjects'
 import { RecentlyWatched } from './recently_watched'
 import { RecommendedVideos } from './recommended_videos'
+import { Chapters } from './Chapters'
 
 const url = 'https://jackiechanbruteforce.ulesson.com/3p/api/content/grade'
 
 export const Dashboard = () => {
   const [courses, setCourses] = useState('')
+  const [openCourse, setOpenCourse] = useState(false)
 
   useEffect(() => {
     if (!courses) {
@@ -55,47 +57,62 @@ export const Dashboard = () => {
     }
   ]
 
+  const linkToChapter = id => {
+    console.log(id, '###############')
+    setOpenCourse(!openCourse)
+  }
+
   return (
-    <Container className='wrapper'>
-      <div className='course'>
-        <p className='user-name'>Hello Hassan,</p>
-        <Subjects courses={courses} />
-      </div>
+    <Container>
+      {!openCourse ? (
+        <div className='wrapper'>
+          <div className='course'>
+            <p className='user-name'>Hello Hassan,</p>
+            <Subjects courses={courses} linkToChapter={linkToChapter} />
+          </div>
 
-      <div>
-        <div className='watched'>
-          <p className='topic'>Recently Watched Topics</p>
-          <div className='see-btn'>
-            <p>See All</p>
+          <div>
+            <div className='watched'>
+              <p className='topic'>Recently Watched Topics</p>
+              <div className='see-btn'>
+                <p>See All</p>
+              </div>
+            </div>
+            <RecentlyWatched recentlyPlayedVideos={recentlyPlayedVideos} />
+          </div>
+
+          <div>
+            <div className='watched'>
+              <p className='topic'>Recommmended Videos</p>
+              <div className='see-btn'>
+                <p>See All</p>
+              </div>
+            </div>
+            <RecommendedVideos recommendedVideos={recentlyPlayedVideos} />
           </div>
         </div>
-        <RecentlyWatched recentlyPlayedVideos={recentlyPlayedVideos} />
-      </div>
-
-      <div>
-        <div className='watched'>
-          <p className='topic'>Recommmended Videos</p>
-          <div className='see-btn'>
-            <p>See All</p>
-          </div>
-        </div>
-        <RecommendedVideos recommendedVideos={recentlyPlayedVideos} />
-      </div>
+      ) : (
+        <Chapters />
+      )}
     </Container>
   )
 }
 
 const Container = styled.div`
-  padding: 1em;
-  font-family: Itim;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  line-height: 114.21%;
-  letter-spacing: -1px;
-  color: #313848;
-  max-width: max-content;
-  margin: 0 auto;
+  background-color: #e5e5e5;
+
+  .wrapper {
+    padding: 1em;
+    font-family: Itim;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 114.21%;
+    letter-spacing: -1px;
+    color: #313848;
+    max-width: max-content;
+    margin: 0 auto;
+  }
 
   .user-name {
     font-family: Itim;
@@ -113,6 +130,7 @@ const Container = styled.div`
     align-items: center;
     padding: 1em 1em 10px 15px;
   }
+
   .topic {
     font-family: Itim;
     font-style: normal;
@@ -122,6 +140,7 @@ const Container = styled.div`
     letter-spacing: 0.2px;
     color: #313848;
   }
+
   .see-btn p {
     background: #ea7052;
     border-radius: 6.90722px;

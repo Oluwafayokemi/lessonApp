@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const EmbedVideo = ({ mediaUrl }) => {
+export const EmbedVideo = ({ mediaUrl, style, wide = '' }) => {
   return (
     <MediaFrame
+      className={wide ? style : ''}
       scrolling='yes'
       src={mediaUrl}
       frameBorder='0'
-      // allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+      allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
       title='Embedded cloudfront'
     />
   )

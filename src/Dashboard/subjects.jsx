@@ -1,26 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const Subjects = ({ courses }) => {
+export const Subjects = ({ courses, linkToChapter }) => {
   return (
     <Container>
       {courses[0] &&
-        courses.map(course => (
-          <span key={course?.id} className='course-style'>
-            <div className='image'>
-              <img src={course?.icon} alt={course?.name} />
-            </div>
-            <div className='title'>
-              <span className='name'>{course?.name}</span>
-            </div>
-          </span>
-        ))}
+        courses.map(course => {
+          const { id, name, icon } = course
+          return (
+            <span
+              key={id}
+              className='course-style'
+              onClick={() => linkToChapter(id)}
+            >
+              <div className='image'>
+                <img src={icon} alt={name} />
+              </div>
+              <div className='title'>
+                <span className='name'>{name}</span>
+              </div>
+            </span>
+          )
+        })}
     </Container>
   )
 }
 
 const Container = styled.div`
-  margin-left: 0px;
+
 
   .course-style {
     grid-template-columns: 100px 50px 100px;
@@ -48,7 +55,7 @@ const Container = styled.div`
     border-radius: 16.575px;
     background: #ffffff;
     opacity: 0.5;
-    box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     z-index: 10;
   }
 
